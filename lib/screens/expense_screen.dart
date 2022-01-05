@@ -1,10 +1,12 @@
 import 'package:budget_tracker/constants.dart';
 import 'package:budget_tracker/models/expense_model.dart';
-import 'package:budget_tracker/services/database_services.dart';
+import 'package:budget_tracker/models/money_data.dart';
+import 'package:budget_tracker/services/expense_database_service.dart';
 import 'package:budget_tracker/widgets/money_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:provider/provider.dart';
 
 class ExpenseScreen extends StatefulWidget {
   const ExpenseScreen({Key? key}) : super(key: key);
@@ -29,12 +31,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     'Dec'
   ];
   String _selectedLocation = 'Jan';
-  Map<String, double> dataMap = {
-    "Home": 950,
-    "Transport": 800,
-    "Food": 770,
-    "Others": 1075,
-  };
+
   List<Expense> _expenses = [];
 
   @override
@@ -52,6 +49,12 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, double> dataMap = {
+      "Home": Provider.of<MoneyData>(context).getExpenses[0],
+      "Transport": Provider.of<MoneyData>(context).getExpenses[1],
+      "Food": Provider.of<MoneyData>(context).getExpenses[2],
+      "Others": Provider.of<MoneyData>(context).getExpenses[3],
+    };
     return Scaffold(
       backgroundColor: const Color(0xfff6f6f6),
       appBar: AppBar(

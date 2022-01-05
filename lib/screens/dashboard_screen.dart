@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:budget_tracker/constants.dart';
 import 'package:budget_tracker/models/money_data.dart';
-import 'package:budget_tracker/screens/add_expense_screen.dart';
-import 'package:budget_tracker/screens/add_income_screen.dart';
+import 'package:budget_tracker/screens/screens.dart';
+
 import 'package:budget_tracker/widgets/dashboard_header/dashboard_header.dart';
 import 'package:budget_tracker/widgets/expense_chart_card.dart';
 import 'package:flutter/material.dart';
@@ -152,7 +152,7 @@ class _DashBoardState extends State<DashBoard> {
                 Consumer<MoneyData>(
                   builder: (context, money, child) {
                     return ExpenseChartCard(
-                        category: 'Income',
+                        category: 'Incoome',
                         homeMoney: money.getExpenses[0],
                         transportMoney: money.getExpenses[1],
                         foodMoney: money.getExpenses[2],

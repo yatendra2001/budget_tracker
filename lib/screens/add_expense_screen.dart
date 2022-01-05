@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:budget_tracker/models/expense_model.dart';
 import 'package:budget_tracker/extension/string_extension.dart';
-import 'package:budget_tracker/services/database_services.dart';
+import 'package:budget_tracker/services/expense_database_service.dart';
 
 class AddExpenseScreen extends StatefulWidget {
   final VoidCallback updateExpenses;
@@ -210,6 +210,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         ExpensesDatabaseService.instance.update(_expense!);
       }
       widget.updateExpenses();
+
       Navigator.pop(context);
     }
   }

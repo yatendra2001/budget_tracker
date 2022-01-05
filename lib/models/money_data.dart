@@ -1,6 +1,6 @@
 import 'package:budget_tracker/models/expense_model.dart';
 import 'package:budget_tracker/models/income_model.dart';
-import 'package:budget_tracker/services/database_services.dart';
+import 'package:budget_tracker/services/expense_database_service.dart';
 import 'package:budget_tracker/services/income_database_service.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/foundation.dart';
@@ -42,6 +42,7 @@ class MoneyData extends ChangeNotifier {
         expenseOthersMoney += _expense[i].money;
       }
     }
+    notifyListeners();
     return [homeMoney, transportMoney, foodMoney, expenseOthersMoney, totalSum];
   }
 
@@ -53,7 +54,7 @@ class MoneyData extends ChangeNotifier {
     double totalSum = 0.0;
 
     for (var i = 0; i < _income.length; i++) {
-      totalSum += _expense[i].money;
+      totalSum += _income[i].money;
       if (EnumToString.convertToString(_income[i].typeOfIncome) == 'salary') {
         salaryMoney += _income[i].money;
       }
@@ -64,10 +65,12 @@ class MoneyData extends ChangeNotifier {
         incomeOthersMoney += _income[i].money;
       }
     }
+    notifyListeners();
     return [salaryMoney, profitMoney, incomeOthersMoney, totalSum];
   }
 
   double get getRemainingMoney {
+    notifyListeners();
     return (getIncomes[3] - getExpenses[4]);
   }
 }

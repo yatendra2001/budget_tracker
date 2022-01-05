@@ -37,10 +37,10 @@ class _IncomeScreenState extends State<IncomeScreen> {
   @override
   void initState() {
     super.initState();
-    _getIncome();
+    _getIncomes();
   }
 
-  Future<void> _getIncome() async {
+  Future<void> _getIncomes() async {
     final income = await IncomeDatabaseService.instance.getAllIncomes();
     if (mounted) {
       setState(() => _income = income);
@@ -124,7 +124,7 @@ class _IncomeScreenState extends State<IncomeScreen> {
               final income = _income[index - 1];
               return IncomeTile(
                 income: income,
-                updateIncomes: _getIncome,
+                updateIncomes: _getIncomes,
               );
             },
             separatorBuilder: (_, __) => const SizedBox(height: 10),
